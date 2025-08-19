@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — BemGlicemia{% endblock %}
+
+{% block content %}
+<div class="dash-head">
+  <h2>Suas medições</h2>
+  <div class="actions">
+    <a class="btn" href="{{ url_for('add_reading') }}">Adicionar</a>
+    <a class="btn" href="{{ url_for('export_pdf') }}">Exportar PDF</a>
+  </div>
+</div>
+
+{% if out_of_range %}
+  <div class="alert warning">
+    ⚠️ Atenção: sua última medição ({{ latest|int }} mg/dL — {{ latest_status }}) está fora do intervalo recomendado (70–180).
+  </div>
+
+  <audio id="alertSound" src="{{ url_for('static', filename='sounds/alert.mp3') }}" preload="auto"></audio>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!sessionStorage.getItem("alertPlayed")) {
+        const audio = document.getElementById("alertSound");
+        if (audio) {
+          audio.play().catch(err => console.log("Autoplay bloqueado:", err));
+          sessionStorage.setItem("alertPlayed", "true");
+        }
+      }
+    });
+  </script>
+{% endif %}
+
+<canvas id="glucoseChart" height="120"></canvas>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Data/Hora</th>
+      <th>Valor (mg/dL)</th>
+      <th>Status</th>
+      <th>Observação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in readings %}
+      <tr>
+        <td>{{ r.when.strftime("%d/%m/%Y %H:%M") }}</td>
+        <td class="{% if r.value < 70 or r.value > 180 %}bad{% else %}good{% endif %}">
+          {{ r.value|int }}
+        </td>
+        <td>{{ r.status }}</td>
+        <td>{{ r.note }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  function renderGlucoseChart(canvasId, labels, values) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Glicemia',
+          data: values,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          fill: false,
+          tension: 0.1
+        }]
+      },
+      options: {
+        scales: {
+          x: { title: { display: true, text: 'Data/Hora' } },
+          y: { title: { display: true, text: 'Glicemia (mg/dL)' } }
+        },
+        plugins: {
+          legend: { display: true }
+        }
+      }
+    });
+  }
+
+  fetch('{{ url_for("api_readings") }}')
+    .then(response => response.json())
+    .then(data => {
+      // Converte ISO UTC para horário local do navegador (pt-BR)
+      const labels = data.map(d => new Date(d.when).toLocaleString("pt-BR", { hour12: false }));
+      const values = data.map(d => d.value);
+      renderGlucoseChart('glucoseChart', labels, values);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Nova Medição — BemGlicemia{% endblock %}
+{% block content %}
+<h2>Registrar Medição</h2>
+<form method="post" class="form grid" onsubmit="syncUTC()">
+  <label>Valor (mg/dL)
+    <input type="number" name="value" step="1" min="10" max="1000" required>
+  </label>
+  <label>Data/Hora
+    <input type="datetime-local" id="when" name="when">
+  </label>
+  <input type="hidden" id="when_utc" name="when_utc">
+
+  <label class="grid-span-2">Observação
+    <input type="text" name="note" placeholder="Antes do café, pós-almoço, jejum...">
+  </label>
+  <div class="grid-span-2">
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
+</form>
+
+<script>
+  (function () {
+    const input = document.getElementById("when");
+    if (!input) return;
+
+    const now = new Date();
+    now.setSeconds(0, 0);
+
+    const pad = n => String(n).padStart(2, "0");
+    const yyyy = now.getFullYear();
+    const mm   = pad(now.getMonth() + 1);
+    const dd   = pad(now.getDate());
+    const hh   = pad(now.getHours());
+    const min  = pad(now.getMinutes());
+
+    input.value = `${yyyy}-${mm}-${dd}T${hh}:${min}`;
+  })();
+
+  function syncUTC() {
+    const localInput = document.getElementById("when");
+    const utcInput   = document.getElementById("when_utc");
+    if (!localInput || !utcInput) return;
+
+    const localDate = new Date(localInput.value);
+    if (!isNaN(localDate)) {
+      utcInput.value = localDate.toISOString();
+    } else {
+      utcInput.value = new Date().toISOString();
+    }
+  }
+</script>
+{% endblock %}
