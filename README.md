@@ -2,10 +2,9 @@
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue) ![Flask](https://img.shields.io/badge/Flask-2.x-orange) ![SQLite](https://img.shields.io/badge/SQLite-3-lightgrey) ![Chart.js](https://img.shields.io/badge/Chart.js-4-lightblue) ![ReportLab](https://img.shields.io/badge/ReportLab-3.7-green)
 
-<p style="text-align: justify;">
+
 BemGlicemia é um <strong>sistema web completo para monitoramento de glicemia</strong>, desenvolvido em Python com Flask, voltado para usuários com diabetes ou pessoas que desejam acompanhar seus índices glicêmicos ao longo do tempo. O sistema combina segurança, interface amigável e funcionalidades avançadas, como gráficos dinâmicos e relatórios em PDF.
-</p>
----
+
 
 ## 🎨 Tecnologias Utilizadas
 
