@@ -1,4 +1,4 @@
-# 🌸 BemGlicemia - Controle de Glicemia Pessoal
+# 🌸 BemGlicemia - Monitore sua glicemia com leveza 
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue) ![Flask](https://img.shields.io/badge/Flask-2.x-orange) ![SQLite](https://img.shields.io/badge/SQLite-3-lightgrey) ![Chart.js](https://img.shields.io/badge/Chart.js-4-lightblue) ![ReportLab](https://img.shields.io/badge/ReportLab-3.7-green)
 
