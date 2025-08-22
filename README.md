@@ -136,5 +136,12 @@ Contribuições são bem-vindas! Para reportar problemas ou sugerir melhorias, a
 
 ## 🌈 Contato
 
-Desenvolvido por **Andréa Correia**
+Desenvolvido por:
+ **Andréa Correia**
 [GitHub](https://github.com/Andreapnz) | [LinkedIn](https://www.linkedin.com/in/andrea-correia-costa/)
+ **Eunice M. Araujo**
+[GitHub](https://github.com/Andreapnz) | [LinkedIn](https://www.linkedin.com/in/andrea-correia-costa/)
+ **Liandra**
+[GitHub](https://github.com/Andreapnz) | [LinkedIn](https://www.linkedin.com/in/liandra-lemos/))
+
+
