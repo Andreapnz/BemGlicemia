@@ -140,7 +140,7 @@ Desenvolvido por:
  **Andréa Correia**
 [GitHub](https://github.com/Andreapnz) | [LinkedIn](https://www.linkedin.com/in/andrea-correia-costa/)
  **Eunice M. Araujo**
-[GitHub](https://github.com/Andreapnz) | [LinkedIn](https://www.linkedin.com/in/andrea-correia-costa/)
+[LinkedIn](https://www.linkedin.com/in/eunice-araujo/)
  **Liandra**
 [GitHub](https://github.com/Andreapnz) | [LinkedIn](https://www.linkedin.com/in/liandra-lemos/))
 
